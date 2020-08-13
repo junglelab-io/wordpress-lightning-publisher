@@ -70,7 +70,7 @@ class Lightning_Publisher {
     $invoice = $this->charge->invoice([
       'currency'    => $ifpaid->currency,
       'amount'      => $ifpaid->amount,
-      'description' => get_bloginfo('name') . ': pay to continue reading ' . get_the_title($post_id),
+      'description' => get_bloginfo('name') . ': Please pay to continue listening ' . get_the_title($post_id),
       'metadata'    => [ 'source' => 'wordpress-lightning-publisher', 'post_id' => $post_id, 'url' => get_permalink($post_id) ]
     ]);
 
@@ -144,8 +144,8 @@ class Lightning_Publisher {
    */
   protected static function format_unpaid($post_id, $ifpaid, $public) {
     $attrs  = $ifpaid->attrs;
-    $text   = '<p>' . sprintf(!isset($attrs['text']) ? 'To continue reading the rest of this post, please pay <em>%s</em>.' : $attrs['text'], $ifpaid->amount . ' ' . $ifpaid->currency).'</p>';
-    $button = sprintf('<a class="ln-publisher-btn" href="#" data-publisher-postid="%d">%s</a>', $post_id, !isset($attrs['button']) ? 'Pay to continue reading' : $attrs['button']);
+    $text   = '<p>' . sprintf(!isset($attrs['text']) ? 'To continue the rest of this post, please pay <em>%s</em>.' : $attrs['text'], $ifpaid->amount . ' ' . $ifpaid->currency).'</p>';
+    $button = sprintf('<a class="ln-publisher-btn" href="#" data-publisher-postid="%d">%s</a>', $post_id, !isset($attrs['button']) ? 'Alright i`ll Pay!' : $attrs['button']);
 
     return sprintf('%s<div class="ln-publisher-pay">%s%s</div>', $public, $text, $button);
   }
